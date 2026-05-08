@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XV Años · Victoria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Raleway:wght@200;300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="icono.png" type="image/png">
+</head>
+<body>
+
+
+  <canvas id="petals-canvas"></canvas>
+
+  <!-- ══ SECCIÓN 1: HERO ══ -->
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="xv-badge">✦ &nbsp; XV Años &nbsp; ✦</div>
+      <h1 class="hero-name">Victoria</h1>
+      <div class="hero-divider"><span>♡</span></div>
+      <div class="hero-photo-wrap">
+        <div class="hero-photo-frame">
+          <img src="main.jfif" alt="Victoria">
+        </div>
+        <div class="hero-photo-ring"></div>
+      </div>
+      <p class="hero-subtitle">Una celebración llena de amor</p>
+    </div>
+    <div class="scroll-cue">
+      <span>Continuar</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ══ SECCIÓN 2: MENSAJE ══ -->
+  <section id="message" class="reveal-section">
+    <div class="message-inner">
+      <div class="message-text">
+        <div class="msg-label" id="msg-label">Con el corazón lleno de gratitud</div>
+        <div class="msg-body">
+          <span id="typewriter-text"></span><span id="typewriter-cursor"></span>
+        </div>
+      </div>
+      <div class="message-photo-wrap" id="msg-photo-wrap">
+        <div class="msg-frame">
+          <div class="msg-photo-border">
+            <img src="section_2.jfif" alt="Familia">
+          </div>
+          <p class="msg-photo-caption" id="photo-caption">Con todo nuestro amor ♡</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SECCIÓN 3: GALERÍA ══ -->
+  <section id="galeria" class="reveal-section">
+    <div class="galeria-inner">
+
+      <div class="section-header reveal-up">
+        <span class="section-tag">✦ &nbsp; A través del tiempo &nbsp; ✦</span>
+        <h2 class="section-title">Galería de Recuerdos</h2>
+        <div class="section-divider"><span>♡</span></div>
+      </div>
+
+      <div class="slider-wrap reveal-up">
+
+        <!-- Imagen principal -->
+        <div class="slider-stage">
+          <button class="slider-btn prev" id="btn-prev" aria-label="Anterior">&#8249;</button>
+
+          <div class="slider-track" id="slider-track">
+            <!-- slides generados por JS -->
+          </div>
+
+          <button class="slider-btn next" id="btn-next" aria-label="Siguiente">&#8250;</button>
+        </div>
+
+        <!-- Contador -->
+        <div class="slider-counter">
+          <span id="slide-current">1</span> / <span id="slide-total">10</span>
+        </div>
+
+        <!-- Miniaturas -->
+        <div class="slider-thumbs" id="slider-thumbs"></div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SECCIÓN 4: TEMPORIZADOR & UBICACIONES ══ -->
+  <section id="countdown" class="reveal-section">
+    <div class="countdown-inner">
+
+      <div class="section-header reveal-up">
+        <span class="section-tag">✦ &nbsp; Falta poco &nbsp; ✦</span>
+        <h2 class="section-title">El Gran Día <br> 18 de julio </h2>
+        <div class="section-divider"><span>♡</span></div>
+      </div>
+
+      <!-- TEMPORIZADOR -->
+      <div class="timer-container reveal-up">
+        <div class="timer-box">
+          <div class="timer-value" id="timer-days">0</div>
+          <div class="timer-label">Días</div>
+        </div>
+        <div class="timer-box">
+          <div class="timer-value" id="timer-hours">0</div>
+          <div class="timer-label">Horas</div>
+        </div>
+        <div class="timer-box">
+          <div class="timer-value" id="timer-minutes">0</div>
+          <div class="timer-label">Minutos</div>
+        </div>
+        <div class="timer-box">
+          <div class="timer-value" id="timer-seconds">0</div>
+          <div class="timer-label">Segundos</div>
+        </div>
+      </div>
+
+      <!-- UBICACIONES -->
+      <div class="locations-container reveal-up">
+        
+        <!-- CEREMONIA -->
+        <div class="location-card">
+          <div class="location-icon">⛪</div>
+          <h3 class="location-title">Ceremonia</h3>
+          <p class="location-time">4:00 PM</p>
+          <div class="location-details">
+            <p class="location-place">Parroquia San Juan Bautista</p>
+            <p class="location-address">Maravatío, Michoacán</p>
+          </div>
+          <a href="https://maps.app.goo.gl/dssriwUSB1d6wVrv9" target="_blank" class="location-link">
+            Ver en Maps
+          </a>
+        </div>
+
+        <!-- RECEPCIÓN -->
+        <div class="location-card">
+          <div class="location-icon">🎉</div>
+          <h3 class="location-title">Recepción</h3>
+          <p class="location-time">6:00 PM</p>
+          <div class="location-details">
+            <p class="location-place">Finca Galán</p>
+            <p class="location-address">El Tejero, Maravatío, Michoacán</p>
+          </div>
+          <a href="https://maps.app.goo.gl/LBGG6BWQoi4jkEZL7" target="_blank" class="location-link">
+            Ver en Maps
+          </a>
+        </div>
+
+      </div>
+
+
+      
+      <!-- MAPAS DOBLES -->
+      <div class="maps-wrapper reveal-up">
+
+        <div class="map-block">
+          <h3 class="map-title">Ceremonia</h3>
+          <div class="map-container">
+            <iframe 
+              src="https://www.google.com/maps?q=Parroquia+San+Juan+Bautista+Maravatio&output=embed"
+              loading="lazy">
+            </iframe>
+          </div>
+          <a href="https://maps.app.goo.gl/dssriwUSB1d6wVrv9" target="_blank" class="map-btn">
+            Cómo llegar
+          </a>
+        </div>
+
+        <div class="map-block">
+          <h3 class="map-title">Recepción</h3>
+          <div class="map-container">
+            <iframe 
+              src="https://www.google.com/maps?q=Finca+Galan+Maravatio&output=embed"
+              loading="lazy">
+            </iframe>
+          </div>
+          <a href="https://maps.app.goo.gl/LBGG6BWQoi4jkEZL7" target="_blank" class="map-btn">
+            Cómo llegar
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ SECCIÓN 5: RSVP ══ -->
+  <section id="rsvp" class="reveal-section">
+    <div class="rsvp-inner">
+      <span class="rsvp-subtitle">✦ &nbsp; Confirmación de asistencia &nbsp; ✦</span>
+      <h2 class="rsvp-title">¿Nos acompañas?</h2>
+      <button class="btn-rsvp" id="btn-rsvp" onclick="confirmarAsistencia(this)">
+        ¡Acepto la invitación! &nbsp;🌸
+      </button>
+    </div>
+  </section>
+
+  <audio id="bg-music" autoplay loop>
+  <source src="musica_fondo.mp3" type="audio/mpeg">
+</audio>
+<audio id="rsvp-sound">
+  <source src="click_sound.wav" type="audio/wav">
+</audio>
+
+
+
+  <script src="app.js"></script>
+</body>
+</html>
