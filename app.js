@@ -376,30 +376,110 @@ function confirmarAsistencia(btn) {
 startCountdown();
 
 /* ══════════════════════════════════════════
-   MÚSICA AUTOMÁTICA
+   MÚSICA — COMPATIBLE CON ANDROID & iOS
 ══════════════════════════════════════════ */
 (function () {
   const music = document.getElementById('bg-music');
   music.volume = 0.25;
 
-  function activarAudio() {
+  /* ── Botón flotante de música ── */
+  const btn = document.createElement('button');
+  btn.id = 'music-fab';
+  btn.setAttribute('aria-label', 'Reproducir música');
+  btn.innerHTML = '♪';
+  Object.assign(btn.style, {
+    position:       'fixed',
+    bottom:         '24px',
+    right:          '24px',
+    zIndex:         '9999',
+    width:          '52px',
+    height:         '52px',
+    borderRadius:   '50%',
+    border:         '2px solid rgba(255,255,255,0.7)',
+    background:     'rgba(126,200,227,0.85)',
+    color:          '#fff',
+    fontSize:       '22px',
+    cursor:         'pointer',
+    boxShadow:      '0 4px 16px rgba(0,0,0,0.18)',
+    display:        'flex',
+    alignItems:     'center',
+    justifyContent: 'center',
+    backdropFilter: 'blur(6px)',
+    transition:     'transform .2s, background .2s',
+  });
+  document.body.appendChild(btn);
+
+  let playing = false;
+
+  function tocarMusica() {
     music.muted = false;
-    music.play().catch(() => {});
-    document.removeEventListener('click', activarAudio);
-    document.removeEventListener('touchstart', activarAudio);
+    music.volume = 0.25;
+    const p = music.play();
+    if (p !== undefined) {
+      p.then(() => {
+        playing = true;
+        btn.innerHTML = '♫';
+        btn.style.background = 'rgba(80,160,210,0.90)';
+        /* animación de pulso mientras suena */
+        btn.style.animation = 'musicPulse 1.8s ease-in-out infinite';
+      }).catch(() => {
+        /* si aún falla, el botón permanece visible para reintentar */
+      });
+    }
   }
 
+  function pausarMusica() {
+    music.pause();
+    playing = false;
+    btn.innerHTML = '♪';
+    btn.style.background = 'rgba(126,200,227,0.85)';
+    btn.style.animation = 'none';
+  }
+
+  /* Alternar al pulsar el botón flotante */
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    playing ? pausarMusica() : tocarMusica();
+  });
+
+  /* Intentar autoplay al cargar (funciona en iOS con atributos correctos,
+     y en algunos Android; si falla el botón ya está visible) */
   window.addEventListener('load', () => {
-    music.volume = 0.25;
-    const playPromise = music.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        document.addEventListener('scroll', activarAudio, { once: true });
-        document.addEventListener('click',  activarAudio, { once: true });
+    music.muted = true;            /* muted permite autoplay en más navegadores */
+    const p = music.play();
+    if (p !== undefined) {
+      p.then(() => {
+        /* Autoplay ok → desmutear suavemente */
+        music.muted = false;
+        playing = true;
+        btn.innerHTML = '♫';
+        btn.style.background = 'rgba(80,160,210,0.90)';
+        btn.style.animation = 'musicPulse 1.8s ease-in-out infinite';
+      }).catch(() => {
+        /* Autoplay bloqueado → el botón flotante guía al usuario */
+        music.muted = false;
       });
     }
   });
 
-  document.addEventListener('click', activarAudio);
-  document.addEventListener('touchstart', activarAudio);
+  /* Primera interacción del usuario (scroll, toque) activa el audio
+     si todavía no está sonando */
+  function primeraInteraccion() {
+    if (!playing) tocarMusica();
+    document.removeEventListener('touchstart', primeraInteraccion);
+    document.removeEventListener('scroll',     primeraInteraccion);
+  }
+  document.addEventListener('touchstart', primeraInteraccion, { once: true });
+  document.addEventListener('scroll',     primeraInteraccion, { once: true });
+
+  /* Inyectar keyframes del pulso */
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes musicPulse {
+      0%,100% { transform: scale(1);    box-shadow: 0 4px 16px rgba(0,0,0,.18); }
+      50%      { transform: scale(1.12); box-shadow: 0 6px 22px rgba(80,160,210,.5); }
+    }
+    #music-fab:hover { transform: scale(1.08); }
+  `;
+  document.head.appendChild(style);
 })();
